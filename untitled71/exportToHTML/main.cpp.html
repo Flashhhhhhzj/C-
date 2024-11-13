@@ -1,0 +1,413 @@
+<html>
+<head>
+<title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d0a8ff;}
+.s1 { color: #ffffff;}
+.s2 { color: #fc6a5d;}
+.s3 { color: #fc5fa3; font-weight: bold;}
+.s4 { color: #6c7986;}
+.s5 { color: #d0bf69;}
+.s6 { color: #9ef1dd;}
+</style>
+</head>
+<body bgcolor="#292a2f">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">#include </span><span class="s2">&lt;iostream&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;string&gt;</span>
+<span class="s3">using namespace </span><span class="s1">std;</span>
+
+<span class="s4">// 基类，用于存储和管理员工的个人信息</span>
+<span class="s3">class </span><span class="s1">PersonalInfo</span>
+<span class="s1">{</span>
+<span class="s3">protected</span><span class="s1">:</span>
+    <span class="s4">// 成员变量，用于存储个人详细信息</span>
+    <span class="s1">string name;         </span><span class="s4">// 员工的全名</span>
+    <span class="s1">string ic;           </span><span class="s4">// 员工的身份证号</span>
+    <span class="s3">int </span><span class="s1">birthDay;        </span><span class="s4">// 员工的出生日期</span>
+    <span class="s3">int </span><span class="s1">birthMonth;      </span><span class="s4">// 员工的出生月份</span>
+    <span class="s3">int </span><span class="s1">birthYear;       </span><span class="s4">// 员工的出生年份</span>
+
+<span class="s3">public</span><span class="s1">:</span>
+    <span class="s4">// 带默认值的构造函数，用于初始化个人详细信息</span>
+    <span class="s1">PersonalInfo(string empName = </span><span class="s2">&quot;&quot;</span><span class="s1">, string empId = </span><span class="s2">&quot;&quot;</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bDay = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bMonth = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bYear = </span><span class="s5">0</span><span class="s1">)</span>
+            <span class="s1">: name(empName), ic(empId), birthDay(bDay), birthMonth(bMonth), birthYear(bYear) {}</span>
+
+    <span class="s4">// 获取员工姓名的函数</span>
+    <span class="s1">string getName() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">name; }</span>
+
+    <span class="s4">// 更新员工姓名的函数</span>
+    <span class="s3">void </span><span class="s1">setName(</span><span class="s3">const </span><span class="s1">string &amp;n) { name = n; }</span>
+
+    <span class="s4">// 获取身份证号的函数</span>
+    <span class="s1">string getIc() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">ic; }</span>
+
+    <span class="s4">// 更新身份证号的函数</span>
+    <span class="s3">void </span><span class="s1">setIc(</span><span class="s3">const </span><span class="s1">string &amp;icc) { ic = icc; }</span>
+
+    <span class="s4">// 获取出生日期的函数</span>
+    <span class="s3">int </span><span class="s1">getBirthDay() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">birthDay; }</span>
+
+    <span class="s4">// 更新出生日期的函数</span>
+    <span class="s3">void </span><span class="s1">setBirthDay(</span><span class="s3">int </span><span class="s1">day) { birthDay = day; }</span>
+
+    <span class="s4">// 获取出生月份的函数</span>
+    <span class="s3">int </span><span class="s1">getBirthMonth() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">birthMonth; }</span>
+
+    <span class="s4">// 更新出生月份的函数</span>
+    <span class="s3">void </span><span class="s1">setBirthMonth(</span><span class="s3">int </span><span class="s1">month) { birthMonth = month; }</span>
+
+    <span class="s4">// 获取出生年份的函数</span>
+    <span class="s3">int </span><span class="s1">getBirthYear() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">birthYear; }</span>
+
+    <span class="s4">// 更新出生年份的函数</span>
+    <span class="s3">void </span><span class="s1">setBirthYear(</span><span class="s3">int </span><span class="s1">year) { birthYear = year; }</span>
+
+    <span class="s4">// 输入并验证员工个人信息的函数</span>
+    <span class="s3">void </span><span class="s1">inputPersonalInfo()</span>
+    <span class="s1">{</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Input Personal Information:</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s4">// 提示输入员工姓名；使用 getline 处理带空格的姓名</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your Name: &quot;</span><span class="s1">;</span>
+        <span class="s1">cin.ignore();  </span><span class="s4">// 清除先前输入中遗留的字符</span>
+        <span class="s1">getline(cin, name);</span>
+
+        <span class="s4">// 提示输入员工身份证号</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;IC No: &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; ic;</span>
+
+        <span class="s4">// 输入并验证出生年份（必须在 1900 到 2100 之间）</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your Date of Birth (Year): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; birthYear;</span>
+        <span class="s3">while </span><span class="s1">(birthYear &lt; </span><span class="s5">1900 </span><span class="s1">|| birthYear &gt; </span><span class="s5">2100</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Year. Please enter a valid year (between 1900 and 2100): &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; birthYear;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 输入并验证出生月份（必须在 1 到 12 之间）</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your Date of Birth (Month): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; birthMonth;</span>
+        <span class="s3">while </span><span class="s1">(birthMonth &lt; </span><span class="s5">1 </span><span class="s1">|| birthMonth &gt; </span><span class="s5">12</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Month. Please enter a valid month (1-12): &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; birthMonth;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 根据选择的月份输入并验证出生日期</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your Date of Birth (Day): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; birthDay;</span>
+        <span class="s3">int </span><span class="s1">MonthDays[] = {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">28</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">};  </span><span class="s4">// 每个月的天数</span>
+        <span class="s3">while </span><span class="s1">(birthDay &lt; </span><span class="s5">1 </span><span class="s1">|| birthDay &gt; MonthDays[birthMonth])</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Day. Please enter a valid day for the month: &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; birthDay;</span>
+        <span class="s1">}</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+    <span class="s1">}</span>
+<span class="s1">};</span>
+
+<span class="s4">// 基类，用于管理员工的服务和薪资详细信息</span>
+<span class="s3">class </span><span class="s1">ServiceInfo</span>
+<span class="s1">{</span>
+<span class="s3">protected</span><span class="s1">:</span>
+    <span class="s4">// 成员变量，用于存储服务详细信息</span>
+    <span class="s3">int </span><span class="s1">appointDay;      </span><span class="s4">// 员工的任命日期</span>
+    <span class="s3">int </span><span class="s1">appointMonth;    </span><span class="s4">// 员工的任命月份</span>
+    <span class="s3">int </span><span class="s1">appointYear;     </span><span class="s4">// 员工的任命年份</span>
+    <span class="s3">double </span><span class="s1">lastSalary;   </span><span class="s4">// 员工最近的薪资</span>
+    <span class="s3">double </span><span class="s1">allowance;    </span><span class="s4">// 员工的总津贴</span>
+
+<span class="s3">public</span><span class="s1">:</span>
+    <span class="s4">// 带默认值的构造函数，用于初始化服务详细信息</span>
+    <span class="s1">ServiceInfo(</span><span class="s3">int </span><span class="s1">aDay = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">aMonth = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">aYear = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">double </span><span class="s1">salary = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">double </span><span class="s1">allow = </span><span class="s5">0</span><span class="s1">)</span>
+            <span class="s1">: appointDay(aDay), appointMonth(aMonth), appointYear(aYear), lastSalary(salary), allowance(allow) {}</span>
+
+    <span class="s4">// 获取任命日期的函数</span>
+    <span class="s3">int </span><span class="s1">getAppointDay() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">appointDay; }</span>
+
+    <span class="s4">// 更新任命日期的函数</span>
+    <span class="s3">void </span><span class="s1">setAppointDay(</span><span class="s3">int </span><span class="s1">day) { appointDay = day; }</span>
+
+    <span class="s4">// 获取任命月份的函数</span>
+    <span class="s3">int </span><span class="s1">getAppointMonth() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">appointMonth; }</span>
+
+    <span class="s4">// 更新任命月份的函数</span>
+    <span class="s3">void </span><span class="s1">setAppointMonth(</span><span class="s3">int </span><span class="s1">month) { appointMonth = month; }</span>
+
+    <span class="s4">// 获取任命年份的函数</span>
+    <span class="s3">int </span><span class="s1">getAppointYear() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">appointYear; }</span>
+
+    <span class="s4">// 更新任命年份的函数</span>
+    <span class="s3">void </span><span class="s1">setAppointYear(</span><span class="s3">int </span><span class="s1">year) { appointYear = year; }</span>
+
+    <span class="s4">// 获取最后薪资的函数</span>
+    <span class="s3">double </span><span class="s1">getLastSalary() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">lastSalary; }</span>
+
+    <span class="s4">// 更新最后薪资的函数</span>
+    <span class="s3">void </span><span class="s1">setLastSalary(</span><span class="s3">double </span><span class="s1">salary) { lastSalary = salary; }</span>
+
+    <span class="s4">// 获取津贴的函数</span>
+    <span class="s3">double </span><span class="s1">getAllowance() </span><span class="s3">const </span><span class="s1">{ </span><span class="s3">return </span><span class="s1">allowance; }</span>
+
+    <span class="s4">// 更新津贴的函数</span>
+    <span class="s3">void </span><span class="s1">setAllowance(</span><span class="s3">double </span><span class="s1">allow) { allowance = allow; }</span>
+
+    <span class="s4">// 输入并验证服务和薪资信息的函数</span>
+    <span class="s3">void </span><span class="s1">inputServiceInfo()</span>
+    <span class="s1">{</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Input Service and Wages Information:</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+
+        <span class="s4">// 输入并验证任命年份（必须在 1900 到 2100 之间）</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Appointment Date (Year): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; appointYear;</span>
+        <span class="s3">while </span><span class="s1">(appointYear &lt; </span><span class="s5">1900 </span><span class="s1">|| appointYear &gt; </span><span class="s5">2100</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Year. Please enter a valid year (between 1900 and 2100): &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; appointYear;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 输入并验证任命月份（必须在 1 到 12 之间）</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Appointment Date (Month): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; appointMonth;</span>
+        <span class="s3">while </span><span class="s1">(appointMonth &lt; </span><span class="s5">1 </span><span class="s1">|| appointMonth &gt; </span><span class="s5">12</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Month. Please enter a valid month (1-12): &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; appointMonth;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 根据选择的月份输入并验证任命日期</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Appointment Date (Day): &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; appointDay;</span>
+        <span class="s3">int </span><span class="s1">MonthDays[] = {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">28</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">};  </span><span class="s4">// 每个月的天数</span>
+        <span class="s3">while </span><span class="s1">(appointDay &lt; </span><span class="s5">1 </span><span class="s1">|| appointDay &gt; MonthDays[appointMonth])</span>
+        <span class="s1">{</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Day. Please enter a valid day for the month: &quot;</span><span class="s1">;</span>
+            <span class="s1">cin &gt;&gt; appointDay;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 输入员工最近的薪资</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Wages Information:</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Latest Salary: &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; lastSalary;</span>
+
+        <span class="s4">// 输入员工的总津贴</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Total Allowance: &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; allowance;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+    <span class="s1">}</span>
+<span class="s1">};</span>
+
+<span class="s4">// 派生类，将 PersonalInfo 和 ServiceInfo 结合在一起</span>
+<span class="s3">class </span><span class="s1">EmployeeInfo : </span><span class="s3">public </span><span class="s1">PersonalInfo, </span><span class="s3">public </span><span class="s1">ServiceInfo</span>
+<span class="s1">{</span>
+    <span class="s4">// 友元函数声明（本例中未使用，但可以用于外部访问）</span>
+    <span class="s3">friend void </span><span class="s1">displayServiceInfo();</span>
+
+<span class="s3">public</span><span class="s1">:</span>
+    <span class="s4">// 构造函数，用于初始化个人和服务信息</span>
+    <span class="s1">EmployeeInfo(string empName = </span><span class="s2">&quot;&quot;</span><span class="s1">, string empId = </span><span class="s2">&quot;&quot;</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bDay = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bMonth = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">bYear = </span><span class="s5">0</span><span class="s1">,</span>
+                 <span class="s3">int </span><span class="s1">aDay = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">aMonth = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">int </span><span class="s1">aYear = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">double </span><span class="s1">salary = </span><span class="s5">0</span><span class="s1">, </span><span class="s3">double </span><span class="s1">allow = </span><span class="s5">0</span><span class="s1">)</span>
+            <span class="s1">: PersonalInfo(empName, empId, bDay, bMonth, bYear), ServiceInfo(aDay, aMonth, aYear, salary, allow) {}</span>
+
+    <span class="s4">// 显示所有员工详细信息的函数</span>
+    <span class="s3">void </span><span class="s1">displayServiceInfo() </span><span class="s3">const</span>
+    <span class="s1">{</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+--------Your Service Information--------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  Name: &quot; </span><span class="s1">&lt;&lt; name &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  IC: &quot; </span><span class="s1">&lt;&lt; ic &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  Date of Birth: &quot; </span><span class="s1">&lt;&lt; birthDay &lt;&lt; </span><span class="s2">&quot;/&quot; </span><span class="s1">&lt;&lt; birthMonth &lt;&lt; </span><span class="s2">&quot;/&quot; </span><span class="s1">&lt;&lt; birthYear &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  Date of Appointment: &quot; </span><span class="s1">&lt;&lt; appointDay &lt;&lt; </span><span class="s2">&quot;/&quot; </span><span class="s1">&lt;&lt; appointMonth &lt;&lt; </span><span class="s2">&quot;/&quot; </span><span class="s1">&lt;&lt; appointYear &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  Your last Salary: RM &quot; </span><span class="s1">&lt;&lt; lastSalary &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;  Total Allowance: RM &quot; </span><span class="s1">&lt;&lt; allowance &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+----------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+    <span class="s1">}</span>
+<span class="s1">};</span>
+
+<span class="s4">// 检查员工是否有资格领取养老金的函数</span>
+<span class="s3">bool </span><span class="s1">checkEligible(EmployeeInfo &amp;emp, </span><span class="s3">int </span><span class="s1">pensionDay, </span><span class="s3">int </span><span class="s1">pensionMonth, </span><span class="s3">int </span><span class="s1">pensionYear)</span>
+<span class="s1">{</span>
+    <span class="s4">// 计算总的服务年限和月份</span>
+    <span class="s3">int </span><span class="s1">serviceYears = pensionYear - emp.getAppointYear();</span>
+    <span class="s3">int </span><span class="s1">serviceMonths = pensionMonth - emp.getAppointMonth();</span>
+    <span class="s3">int </span><span class="s1">age = pensionYear - emp.getBirthYear();</span>
+
+    <span class="s4">// 如果当前年份尚未到达任命日期，则调整服务年限和月份</span>
+    <span class="s3">if </span><span class="s1">(pensionMonth &lt; emp.getAppointMonth() || (pensionMonth == emp.getAppointMonth() &amp;&amp; pensionDay &lt; emp.getAppointDay()))</span>
+    <span class="s1">{</span>
+        <span class="s1">serviceYears--;</span>
+        <span class="s1">serviceMonths += </span><span class="s5">12</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">// 如果当前年份尚未到达出生日期，则调整年龄</span>
+    <span class="s3">if </span><span class="s1">(pensionMonth &lt; emp.getBirthMonth() || (pensionMonth == emp.getBirthMonth() &amp;&amp; pensionDay &lt; emp.getBirthDay()))</span>
+    <span class="s1">{</span>
+        <span class="s1">age--;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your service is: &quot; </span><span class="s1">&lt;&lt; serviceYears &lt;&lt; </span><span class="s2">&quot; years and &quot; </span><span class="s1">&lt;&lt; serviceMonths &lt;&lt; </span><span class="s2">&quot; months</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+
+    <span class="s4">// 检查养老金资格条件</span>
+    <span class="s3">if </span><span class="s1">(age &gt;= </span><span class="s5">40 </span><span class="s1">&amp;&amp; serviceYears &gt;= </span><span class="s5">10</span><span class="s1">)</span>
+    <span class="s1">{</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;You are eligible for pension.</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s3">return true</span><span class="s1">;  </span><span class="s4">// 有资格领取养老金</span>
+    <span class="s1">}</span>
+    <span class="s3">else</span>
+    <span class="s1">{</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;You are NOT eligible for pension.</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(age &lt; </span><span class="s5">40</span><span class="s1">)</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your age is below 40: &quot; </span><span class="s1">&lt;&lt; age &lt;&lt; </span><span class="s2">&quot; years</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s3">if </span><span class="s1">(serviceYears &lt; </span><span class="s5">10</span><span class="s1">)</span>
+            <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Your service is less than 10 years: &quot; </span><span class="s1">&lt;&lt; serviceYears &lt;&lt; </span><span class="s2">&quot; years and &quot; </span><span class="s1">&lt;&lt; serviceMonths &lt;&lt; </span><span class="s2">&quot; months</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s3">return false</span><span class="s1">;  </span><span class="s4">// 没有资格领取养老金</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s4">// 计算并显示养老金和酬金金额的函数</span>
+<span class="s3">void </span><span class="s1">calculatePensionEstimation(EmployeeInfo &amp;emp, </span><span class="s3">int </span><span class="s1">pensionDay, </span><span class="s3">int </span><span class="s1">pensionMonth, </span><span class="s3">int </span><span class="s1">pensionYear)</span>
+<span class="s1">{</span>
+    <span class="s4">// 检查员工是否有资格领取养老金</span>
+    <span class="s3">bool </span><span class="s1">isEligible = checkEligible(emp, pensionDay, pensionMonth, pensionYear);</span>
+    <span class="s3">int </span><span class="s1">monthsOfService;</span>
+
+    <span class="s4">// 如果有资格，计算养老金和酬金</span>
+    <span class="s3">if </span><span class="s1">(isEligible)</span>
+    <span class="s1">{</span>
+        <span class="s4">// 计算总的服务月份</span>
+        <span class="s1">monthsOfService = (pensionYear - emp.getAppointYear()) * </span><span class="s5">12 </span><span class="s1">+ (pensionMonth - emp.getAppointMonth());</span>
+
+        <span class="s4">// 如果养老金日期在任命日期之前，则调整服务月份</span>
+        <span class="s3">if </span><span class="s1">(pensionDay &lt; emp.getAppointDay())</span>
+        <span class="s1">{</span>
+            <span class="s1">monthsOfService--;</span>
+        <span class="s1">}</span>
+
+        <span class="s4">// 将总的服务月份限制在 360 以内（相当于 30 年）</span>
+        <span class="s3">if </span><span class="s1">(monthsOfService &gt; </span><span class="s5">360</span><span class="s1">)</span>
+            <span class="s1">monthsOfService = </span><span class="s5">360</span><span class="s1">;</span>
+
+        <span class="s4">// 计算每月的养老金金额和离职酬金</span>
+        <span class="s3">double </span><span class="s1">pension = </span><span class="s5">0.00167 </span><span class="s1">* monthsOfService * emp.getLastSalary();</span>
+        <span class="s3">double </span><span class="s1">gratuity = </span><span class="s5">0.075 </span><span class="s1">* monthsOfService * emp.getLastSalary();</span>
+
+        <span class="s4">// 输出计算的金额</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Monthly Pension Amount: RM &quot; </span><span class="s1">&lt;&lt; pension &lt;&lt; endl;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Severance Gratuity: RM &quot; </span><span class="s1">&lt;&lt; gratuity &lt;&lt; endl;</span>
+    <span class="s1">}</span>
+    <span class="s3">else</span>
+    <span class="s1">{</span>
+        <span class="s4">// 如果没有资格，不执行任何操作</span>
+        <span class="s3">return</span><span class="s1">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s4">// 主函数，用于运行养老金资格和计算应用程序 (PECA)</span>
+<span class="s3">int </span><span class="s1">main()</span>
+<span class="s1">{</span>
+    <span class="s1">EmployeeInfo emp;  </span><span class="s4">// 创建一个 EmployeeInfo 对象，用于存储员工详细信息</span>
+    <span class="s3">int </span><span class="s1">option;  </span><span class="s4">// 变量，用于存储用户的菜单选择</span>
+    <span class="s3">bool </span><span class="s1">isInfoEntered = </span><span class="s3">false</span><span class="s1">;  </span><span class="s4">// 标志，用于检查是否已输入信息</span>
+
+    <span class="s4">// 循环以显示菜单并处理用户输入</span>
+    <span class="s3">do</span>
+    <span class="s1">{</span>
+        <span class="s4">// 显示菜单选项</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s6">\n</span><span class="s2">+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;|          Pension Eligibility and Calculation App (PECA)       |</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;|1. Input Personal and Service Information                      |</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;|2. Display All Information                                     |</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;|3. Calculate Pension                                           |</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;|4. Exit                                                        |</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;+---------------------------------------------------------------+</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Enter your choice: &quot;</span><span class="s1">;</span>
+        <span class="s1">cin &gt;&gt; option;  </span><span class="s4">// 获取用户的菜单选择</span>
+
+        <span class="s3">switch </span><span class="s1">(option)</span>
+        <span class="s1">{</span>
+            <span class="s3">case </span><span class="s5">1</span><span class="s1">:</span>
+                <span class="s4">// 输入个人和服务信息的选项</span>
+                <span class="s1">emp.inputPersonalInfo();</span>
+                <span class="s1">emp.inputServiceInfo();</span>
+                <span class="s1">isInfoEntered = </span><span class="s3">true</span><span class="s1">;  </span><span class="s4">// 输入信息后将标志设置为 true</span>
+                <span class="s3">break</span><span class="s1">;</span>
+
+            <span class="s3">case </span><span class="s5">2</span><span class="s1">:</span>
+                <span class="s4">// 显示所有已输入信息的选项</span>
+                <span class="s3">if </span><span class="s1">(isInfoEntered)</span>
+                <span class="s1">{</span>
+                    <span class="s1">emp.displayServiceInfo();</span>
+                <span class="s1">}</span>
+                <span class="s3">else</span>
+                <span class="s1">{</span>
+                    <span class="s4">// 提示用户先输入信息</span>
+                    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Please enter your personal and service information first (Option 1).</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+                <span class="s1">}</span>
+                <span class="s3">break</span><span class="s1">;</span>
+
+            <span class="s3">case </span><span class="s5">3</span><span class="s1">:</span>
+                <span class="s4">// 如果已输入信息，选择计算养老金</span>
+                <span class="s3">if </span><span class="s1">(!isInfoEntered)</span>
+                <span class="s1">{</span>
+                    <span class="s4">// 提示用户先输入信息</span>
+                    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Please enter your personal and service information first (Option 1).</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+                <span class="s1">}</span>
+                <span class="s3">else</span>
+                <span class="s1">{</span>
+                    <span class="s4">// 输入并验证养老金日期</span>
+                    <span class="s3">int </span><span class="s1">pensionDay, pensionMonth, pensionYear;</span>
+
+                    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Pension Date (Year): &quot;</span><span class="s1">;</span>
+                    <span class="s1">cin &gt;&gt; pensionYear;</span>
+                    <span class="s3">while </span><span class="s1">(pensionYear &lt; </span><span class="s5">1900 </span><span class="s1">|| pensionYear &gt; </span><span class="s5">2100</span><span class="s1">)</span>
+                    <span class="s1">{</span>
+                        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Year. Please enter a valid year (between 1900 and 2100): &quot;</span><span class="s1">;</span>
+                        <span class="s1">cin &gt;&gt; pensionYear;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Pension Date (Month): &quot;</span><span class="s1">;</span>
+                    <span class="s1">cin &gt;&gt; pensionMonth;</span>
+                    <span class="s3">while </span><span class="s1">(pensionMonth &lt; </span><span class="s5">1 </span><span class="s1">|| pensionMonth &gt; </span><span class="s5">12</span><span class="s1">)</span>
+                    <span class="s1">{</span>
+                        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Month. Please enter a valid month (1-12): &quot;</span><span class="s1">;</span>
+                        <span class="s1">cin &gt;&gt; pensionMonth;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Set Pension Date (Day): &quot;</span><span class="s1">;</span>
+                    <span class="s1">cin &gt;&gt; pensionDay;</span>
+                    <span class="s3">int </span><span class="s1">MonthDays[] = {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">28</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">, </span><span class="s5">30</span><span class="s1">, </span><span class="s5">31</span><span class="s1">};  </span><span class="s4">// 每个月的天数</span>
+                    <span class="s3">while </span><span class="s1">(pensionDay &lt; </span><span class="s5">1 </span><span class="s1">|| pensionDay &gt; MonthDays[pensionMonth])</span>
+                    <span class="s1">{</span>
+                        <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid Day. Please enter a valid day for the month: &quot;</span><span class="s1">;</span>
+                        <span class="s1">cin &gt;&gt; pensionDay;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s4">// 计算并显示养老金和酬金金额</span>
+                    <span class="s1">calculatePensionEstimation(emp, pensionDay, pensionMonth, pensionYear);</span>
+                <span class="s1">}</span>
+                <span class="s3">break</span><span class="s1">;</span>
+
+            <span class="s3">case </span><span class="s5">4</span><span class="s1">:</span>
+                <span class="s4">// 选择退出程序</span>
+                <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Exiting the program.</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+                <span class="s3">return </span><span class="s5">0</span><span class="s1">;  </span><span class="s4">// 退出程序</span>
+
+            <span class="s3">default</span><span class="s1">:</span>
+                <span class="s4">// 处理无效的菜单选项</span>
+                <span class="s1">cout &lt;&lt; </span><span class="s2">&quot;Invalid option. Please try again.</span><span class="s6">\n</span><span class="s2">&quot;</span><span class="s1">;</span>
+                <span class="s3">break</span><span class="s1">;</span>
+        <span class="s1">}</span>
+    <span class="s1">} </span><span class="s3">while </span><span class="s1">(option != </span><span class="s5">4</span><span class="s1">);  </span><span class="s4">// 当用户选择退出时结束循环</span>
+
+    <span class="s3">return </span><span class="s5">0</span><span class="s1">;  </span><span class="s4">// 返回成功</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
